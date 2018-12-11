@@ -1,0 +1,166 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+	
+	<title>Food Desert Pensacola, FL</title>
+
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+
+    <link rel="stylesheet" href="FoodDesertPensacola.github.io/leaflet.css"></script>
+    <link rel="stylesheet" href="Control.OSMGeocoder.css"></script>
+    <script src="FoodDesertPensacola.github.io/leaflet.js"></script>
+    <script src="Control.OSMGeocoder.js"></script>
+
+	
+</head>
+<body>
+<div class="center">UWF - Special Topics in GIS - Module 4<br> Pensacola, Florida Food Deserts</div>
+
+
+<div id="mapid" style="width: 600px; height: 400px;"></div>
+<script>
+
+	var mymap = L.map('mapid').setView([30.463, -87.257], 11);
+
+	L.tileLayer('https://api.mapbox.com/styles/v1/kcofino1/cjp3didwr0deu2rn6mp0l0bhb/tiles/{z}/{x}/{y}?access_token=pk.eyJ1Ijoia2NvZmlubzEiLCJhIjoiY2pwM2NheGViMGdnYTN3bG5xYTFleWUzZSJ9.1OkTvFhjHUAHFMmWyeytjg', {
+		maxZoom: 18,
+		attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
+			'<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+			'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+		id: 'mapbox.streets'
+	}).addTo(mymap);
+var osmGeocoder = new L.Control.OSMGeocoder({
+	collapsed: true,
+	position: 'bottomleft',
+	text: 'Find!'
+	});
+	
+mymap.addControl(osmGeocoder);
+
+	L.marker([30.42, -87.218]).addTo(mymap)
+		.bindPopup("<b>Welcome to Pensacola!</b><br />Where pelicans fly.").openPopup();
+
+	L.circle([30.49, -87.214], 500, {
+		color: 'red',
+		fillColor: '#f03',
+		fillOpacity: 0.5
+	}).addTo(mymap).bindPopup("This area is in a food oasis.");
+
+	L.polygon([
+		[30.56, -87.29],
+		[30.55, -87.29],
+		[30.548, -87.305]
+	]).addTo(mymap).bindPopup("Thisa area is a food desert.");
+
+
+	var popup = L.popup();
+
+	function onMapClick(e) {
+		popup
+			.setLatLng(e.latlng)
+			.setContent("You clicked the map at " + e.latlng.toString())
+			.openOn(mymap);
+	}
+
+	mymap.on('click', onMapClick);
+
+</script>
+
+<div class='legend'>
+<div class='legend-title'>Legend</div>
+ <ul class='legend-point'>
+ <li><span style='background:#000000;'></span>Grocery Stores</li>
+ </ul>
+<div class='legend-subtitle'>Food Desert & Population</div>
+<div class='legend-scale'>
+ <ul class='legend-labels'>
+ <li><span style='background:#ffffb3;'></span>180-688</li>
+ <li><span style='background:#feda76;'></span>689-973</li>
+ <li><span style='background:#feda76;'></span>974-1568</li>
+ <li><span style='background:#fd8b3a;'></span>1569-2264</li>
+ <li><span style='background:#ef3b1f;'></span>2265-3179</li>
+ <li><span style='background:#bd0026;'></span>>10,000+</li>
+ </ul>
+</div>
+</div>
+<style type='text/css'>
+.legend {
+ font-family: "Calibri";
+}
+.legend .legend-title {
+ text-align: left;
+ margin-bottom: 3px;
+ font-weight: bold;
+ font-size: 90%;
+ }
+ .legend .legend-subtitle {
+ text-align: left;
+ margin-bottom: 5px;
+UWF Online GIS GIS 4930: Special Topics in GIS
+Copyright, 2018 Page 19 Project 4: Analyze Week 1
+ font-weight: bold;
+ font-size: 70%;
+ }
+ .legend .legend-scale ul {
+ margin: 0;
+ margin-bottom: 5px;
+ padding: 0;
+ float: left;
+ list-style: none;
+ }
+ .legend .legend-scale ul li {
+ font-size: 80%;
+ list-style: none;
+ margin-left: 0;
+ line-height: 18px;
+ margin-bottom: 2px;
+ }
+ .legend ul.legend-labels li span {
+ display: block;
+ float: left;
+ height: 16px;
+ width: 30px;
+ margin-right: 5px;
+ margin-left: 0;
+ border: 1px solid #999;
+ }
+ .legend .legend-point ul {
+ margin: 0;
+ margin-bottom: 5px;
+ padding: 0;
+ float: left;
+ list-style: none;
+ }
+ .legend .legend-point ul li {
+ font-size: 80%;
+ list-style: none;
+ margin-left: 0;
+ line-height: 18px;
+ margin-bottom: 2px;
+ }
+UWF Online GIS GIS 4930: Special Topics in GIS
+Copyright, 2018 Page 20 Project 4: Analyze Week 1
+ .legend ul.legend-labels li span {
+ display: circle;
+ float: left;
+ height: 16px;
+ width: 30px;
+ margin-right: 5px;
+ margin-left: 0;
+ border: 1px solid #999;
+ }
+ .legend .legend-source {
+ font-size: 70%;
+ color: #999;
+ clear: both;
+ }
+ .legend a {
+ color: #777;
+ }
+</style>
+
+</body>
+</html>
